@@ -26,10 +26,11 @@ jobs:
     - name: Find VSTest.console.exe
       id: vswhere
       run: |
-        setx VSINSTALLDIR $($((Invoke-Expression "& 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe' -latest -products * -requires Microsoft.VisualStudio.PackageGroup.TestTools -property installationPath")) + "\Common7\IDE\Extensions\TestPlatform")
+        $vsTestPath = & 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe' -latest -requires Microsoft.VisualStudio.PackageGroup.TestTools -find **\vstest.console.exe
+        echo "##vso[task.setvariable variable=VSTEST_CONSOLE_PATH]$vsTestPath"
 
     - name: Run tests
       run: |
-        $VSTEST_PATH = (Get-Item -Path Env:VSINSTALLDIR).Value + "\vstest.console.exe"
-        & $VSTEST_PATH ./SampleGitHubActions.Test/bin/Release/SampleGitHubActions.Test.dll
+        $vstestPath = $env:VSTEST_CONSOLE_PATH
+        & $vstestPath ./SampleGitHubActions.Test/bin/Release/SampleGitHubActions.Test.dll
       shell: pwsh
