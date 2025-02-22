@@ -19,7 +19,7 @@ jobs:
 
     - name: Restore dependencies
       run: |
-        nuget restore ./SampleGitHubActions.Test/SampleGitHubActions.Test.csproj
+        nuget restore ./SampleGitHubActions.Test/SampleGitHubActions.Test.csproj -SolutionDirectory .
 
     - name: Build
       run: |
