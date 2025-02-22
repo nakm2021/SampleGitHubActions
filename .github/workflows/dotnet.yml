@@ -26,5 +26,8 @@ jobs:
     - name: Install Visual Studio Test Platform
       run: choco install visualstudio2019testagent
 
+    - name: Add Visual Studio Test Platform to PATH
+      run: echo "##vso[task.prependpath]C:\Program Files (x86)\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\Extensions\TestPlatform"
+      
     - name: Run tests
       run: vstest.console.exe ./SampleGitHubActions.Test/bin/Release/SampleGitHubActions.Test.dll
