@@ -26,11 +26,10 @@ jobs:
     - name: Find VSTest.console.exe
       id: vswhere
       run: |
-        $vsTestPath = & 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe' -latest -requires Microsoft.VisualStudio.PackageGroup.TestTools -find **\vstest.console.exe
-        echo "##vso[task.setvariable variable=VSTEST_CONSOLE_PATH]$vsTestPath"
+        $vsTestPath = & 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe' -latest -products * -requires Microsoft.VisualStudio.PackageGroup.TestTools -find **\vstest.console.exe
+        echo "VSTEST_CONSOLE_PATH=$vsTestPath" >> $env:GITHUB_ENV
 
     - name: Run tests
       run: |
-        $vstestPath = $env:VSTEST_CONSOLE_PATH
-        & $vstestPath ./SampleGitHubActions.Test/bin/Release/SampleGitHubActions.Test.dll
+        & $env:VSTEST_CONSOLE_PATH ./SampleGitHubActions.Test/bin/Release/SampleGitHubActions.Test.dll
       shell: pwsh
