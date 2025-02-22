@@ -24,10 +24,11 @@ jobs:
       run: msbuild ./SampleGitHubActions.Test/SampleGitHubActions.Test.csproj /p:Configuration=Release
 
     - name: Find VSTest.console.exe
-      id: vswhere
+      id: find-vstest
       run: |
         $vsTestPath = & 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe' -latest -products * -requires Microsoft.VisualStudio.PackageGroup.TestTools -find **\vstest.console.exe
-        echo "VSTEST_CONSOLE_PATH=$vsTestPath" >> $env:GITHUB_ENV
+        echo "VSTEST_CONSOLE_PATH=$vsTestPath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      shell: pwsh
 
     - name: Run tests
       run: |
