@@ -18,13 +18,13 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Restore dependencies
-      run: |
-        nuget restore ./SampleGitHubActions.Test/SampleGitHubActions.Test.csproj -SolutionDirectory .
+      run: nuget restore ./SampleGitHubActions.Test/SampleGitHubActions.Test.csproj -SolutionDirectory .
 
     - name: Build
-      run: |
-        msbuild ./SampleGitHubActions.Test/SampleGitHubActions.Test.csproj /p:Configuration=Release
+      run: msbuild ./SampleGitHubActions.Test/SampleGitHubActions.Test.csproj /p:Configuration=Release
+
+    - name: Install Visual Studio Test Platform
+      run: choco install visualstudio2019testagent
 
     - name: Run tests
-      run: |
-        vstest.console.exe ./SampleGitHubActions.Test/bin/Release/SampleGitHubActions.Test.dll
+      run: vstest.console.exe ./SampleGitHubActions.Test/bin/Release/SampleGitHubActions.Test.dll
