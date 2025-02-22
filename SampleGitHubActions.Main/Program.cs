@@ -24,5 +24,10 @@ namespace SampleGitHubActions.Main
             Console.WriteLine("Test Project 1");
             Console.ReadKey();
         }
+
+        public static int Add(int a, int b)
+        {
+            return a + b;
+        }
     }
 }

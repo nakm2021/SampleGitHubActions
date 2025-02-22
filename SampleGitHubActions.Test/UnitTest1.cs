@@ -19,5 +19,13 @@ namespace SampleGitHubActions.Test
             var list = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             CollectionAssert.AreEqual(Program.MyList, list);
         }
+
+        [TestMethod]
+        public void TestMethod3()
+        {
+            Assert.AreEqual(Program.Add(1, 2), 3);
+            Assert.AreEqual(Program.Add(10, 20), 30);
+            Assert.AreEqual(Program.Add(100, 200), 300);
+        }
     }
 }
