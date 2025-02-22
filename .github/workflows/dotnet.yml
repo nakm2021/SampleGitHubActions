@@ -28,6 +28,7 @@ jobs:
       run: |
         $vsTestPath = & 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe' -latest -products * -requires Microsoft.VisualStudio.PackageGroup.TestTools -find **\vstest.console.exe
         Write-Output "##vso[task.setvariable variable=VSTEST_CONSOLE_PATH]$vsTestPath"
+        echo "VSTEST_CONSOLE_PATH=$vsTestPath"
       shell: pwsh
 
     - name: Display VSTEST_CONSOLE_PATH
