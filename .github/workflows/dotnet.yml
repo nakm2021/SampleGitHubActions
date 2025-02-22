@@ -27,8 +27,9 @@ jobs:
       id: find-vstest
       run: |
         $vsTestPath = & 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe' -latest -products * -requires Microsoft.VisualStudio.PackageGroup.TestTools -find **\vstest.console.exe
-        Write-Output "##vso[task.setvariable variable=VSTEST_CONSOLE_PATH]$vsTestPath"
-        echo "VSTEST_CONSOLE_PATH=$vsTestPath"
+        echo "VSTEST_CONSOLE_PATH=$vsTestPath" | Out-File -FilePath vsTestPath.txt -Encoding utf8
+        cat vsTestPath.txt
+        echo "VSTEST_CONSOLE_PATH=$vsTestPath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       shell: pwsh
 
     - name: Display VSTEST_CONSOLE_PATH
