@@ -32,3 +32,6 @@ jobs:
           Write-Error "vstest.console.exe not found at $vsTestPath"
         }
       shell: pwsh
+    - name: Calculate Test Coverage
+      run: |
+       dotnet test --collect:"XPlat Code Coverage"
